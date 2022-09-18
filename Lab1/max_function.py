@@ -60,7 +60,7 @@ def look_directions(point, learning_rate):
 
 def algorithm(points):
     global LEARNING_RATE
-    while LEARNING_RATE > 0.1:
+    while LEARNING_RATE > 0.05:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()

@@ -256,7 +256,7 @@ def back_tracking(grid, assignment):
 	return False, assignment
 
 
-# Verificacao Fowarding + Heuristic
+# Heuristic
 def algorithm(draw, grid):
 	# Initializate blocked spots
 	for row in grid:
@@ -265,7 +265,9 @@ def algorithm(draw, grid):
 	draw()
 	time.sleep(SLEEP_TIMER)
 
+	# Flag to end the main loop if nothing changed between 2 loops in a row
 	flag_end = False
+	# Main Heuristic Loop
 	while not flag_end:
 		flag_end = True
 		for event in pygame.event.get():
@@ -277,23 +279,28 @@ def algorithm(draw, grid):
 			for spot in row:
 				if spot.is_barrier() and spot.char != '' and spot.char != 0 and not spot.seen:
 					if int(spot.char) == spot.look_near_neighbors(grid, 'restricted'):
-						print(spot.char, spot.row, spot.col)
+						# print(spot.char, spot.row, spot.col)
 						spot.make_near_neighbors_lamp(draw, grid)
 						spot.already_seen()
 						flag_end = False
+					# Check new blocked spots
 					spot.blocked_spots(grid)
+					# Draw new painted spots
 					draw()
 					time.sleep(SLEEP_TIMER)
 
-	print('Backtracking')
+	# Now, call backtracking
+	print('Backtracking...')
 	answer = back_tracking(grid, [])[1]
 
+	# Draw backtracking answer spots
 	for spot in answer:
 		x, y = spot.get_pos()
 		grid[x][y].make_lamp(grid)
 		draw()
 		time.sleep(SLEEP_TIMER)
 
+	# Finished the solver pipeline
 	print('Finished')
 	return grid
 
