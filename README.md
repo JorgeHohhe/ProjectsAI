@@ -1,9 +1,9 @@
 # ProjectsAI
-AI projects of a university subject
+AI projects of university subject CMC-15 - Artificial Intelligence
 
 # How to Install
 
-In a python 3.7.13 environment, run:
+In a python environment, run:
 
 ```
 git clone https://github.com/JorgeHohhe/ProjectsAI.git
